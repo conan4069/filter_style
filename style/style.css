@@ -176,7 +176,6 @@ body {
   font-size: 1rem;
   font-weight: 300;
   color: var(--color-text);
-  border: 1px dashed grey;
 }
 body main section {
   max-width: 1440px;
@@ -247,42 +246,46 @@ body main section .products {
   display: flex;
   flex-wrap: wrap;
 }
-body main section .products .col {
+body main section .products .col-filter {
   opacity: 1;
   transition: all 1s ease-in-out;
   padding: 1rem;
   flex: 1 0 100%;
 }
-@media (min-width: 992px) {
-  body main section .products .col {
+@media (min-width: 768px) {
+  body main section .products .col-filter {
     flex-basis: 50% !important;
     max-width: 50% !important;
   }
 }
-@media (min-width: 1200px) {
-  body main section .products .col {
+@media (min-width: 992px) {
+  body main section .products .col-filter {
     flex-basis: 33.3333333333% !important;
     max-width: 33.3333333333% !important;
   }
 }
-body main section .products .col a {
+body main section .products .col-filter a {
   width: 100%;
 }
-body main section .products .col a:hover .image .text {
+body main section .products .col-filter a:hover .image .text {
   opacity: 1;
   background-color: rgba(0, 0, 0, 0.3);
 }
-body main section .products .col a .image {
+body main section .products .col-filter a .image {
   width: 100%;
   position: relative;
   background-color: transparent;
   transition: background-color 0.25s ease-in-out 0s;
+  display: flex;
+  justify-content: center;
+  text-align: center;
 }
-body main section .products .col a .image img {
+body main section .products .col-filter a .image img {
   margin: auto;
   width: 100%;
+  max-width: 450px;
 }
-body main section .products .col a .image .text {
+body main section .products .col-filter a .image .text {
   position: absolute;
   top: 0;
   left: 0;
@@ -300,13 +303,20 @@ body main section .products .col a .image .text {
   transition: all 0.25s ease-in-out 0s;
   font-family: "Playfair Display", serif;
 }
-body main section .products .col a .image .text * {
+body main section .products .col-filter a .image .text * {
   font-size: 1.2rem;
 }
-body main section .products .col a .image:hover .text {
+body main section .products .col-filter a .image:hover .text {
   opacity: 1;
   background-color: rgba(0, 0, 0, 0.3);
   transition: all 0.25s ease-in-out 0s;
+}
+body main section .products .col-filter a .name h4 {
+  font-size: 1.25rem;
+  color: var(--color-h);
+  font-family: "Playfair Display", serif;
+  line-height: 1.38;
+  font-weight: 500;
 }
 
 .container-filter {

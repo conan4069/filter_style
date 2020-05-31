@@ -113,7 +113,7 @@ const contentProducts = () => {
         let name = producto.name.toLowerCase();
 
         results.innerHTML += `
-            <div class="col" name=" ${producto.name}" category="${producto.category}" material="${producto.material}" system="${producto.system}">
+            <div class="col-filter" name=" ${producto.name}" category="${producto.category}" material="${producto.material}" system="${producto.system}">
                 <a href="#" link-filter>
                     <div class="image">
                         <img src="${producto.image}" alt="">
@@ -125,7 +125,7 @@ const contentProducts = () => {
                         </div>
                     </div>
                     <div class="name">
-                        ${producto.name}
+                        <h4>${producto.name}</h4>
                     </div>
                 </a>
             </div>
