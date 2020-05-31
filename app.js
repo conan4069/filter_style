@@ -172,29 +172,24 @@ const contentProducts = () => {
     }
 
     if (results.innerHTML === '') {
-        results.innerHTML = `<div no-results style="display: flex">Ningun resultado</div>`
-    } else results.innerHTML += `<div no-results>Ningun resultado</div>`
+        results.innerHTML = `<div no-results style="display: flex">Any result... </div>`
+    } else results.innerHTML += `<div no-results>Any result...</div>`
 }
 contentProducts();
 
-// const elemento = document.querySelector('#products [name*="Virginia"]');
-
 const filtrar = () => {
 
-    console.log(
-        document.getElementById('search-filter').value.length
-    )
+    // Search length
 
     if (document.getElementById('search-filter').value.length <= 0) {
         button_filter.setAttribute('deactivate','')
     }
     else button_filter.removeAttribute('deactivate');
 
-    // console.log(search_filter.value);
 
     const text = search_filter.value.toLowerCase();
 
-    console.log('texto',text)
+    // console.log('texto',text)
 
 
     for (let producto of productos) {
@@ -202,18 +197,16 @@ const filtrar = () => {
 
         if (name.indexOf(text) !== -1) {
             document.querySelector(`#products-filter [name*='${producto.name}']`).classList.remove('d-none');
-            console.log('alguno tiene')
         }
         else {
             document.querySelector(`#products-filter [name*='${producto.name}']`).classList.add('d-none');
-            console.log('nintuno tiene')
         }
     }
 
     const all_product = document.querySelectorAll('#products-filter [name]').length;
-    console.log('all_producta',all_product)
+    // console.log('all_producta',all_product)
     const d_none_product = document.querySelectorAll('#products-filter [name].d-none').length;
-    console.log('d_none_product',d_none_product)
+    // console.log('d_none_product',d_none_product)
 
     if (all_product === d_none_product) {
         document.querySelector(`#products-filter > [no-results]`).style.display = 'flex';
@@ -221,77 +214,48 @@ const filtrar = () => {
     else {
          document.querySelector(`#products-filter > [no-results]`).style.display = 'none';
     }
-
-   
 }
 search_filter.addEventListener('keyup', filtrar);
 
 
-const btn_filter = document.querySelectorAll('[select-filter]');
-
-
-const selectElement = document.querySelector('[select-filter]');
-
-selectElement.addEventListener('change', (event) => {
-    // const resultado = document.querySelector('.resultado');
-    // resultado.textContent = `Te gusta el sabor ${event.target.value}`;
-    console.log(event.target.value)
-});
-
 const button_filter = document.querySelector('[btn-filter]');
 
 function selectFilter (argument) {
-    // Filtrar los select
+    // Filter the selects
 
-    console.log('argument(',argument,')')
+    // console.log('argument(',argument,')')
     const value_select = document.querySelector(`[select-filter="${argument}"]`).value;
-    console.log('value_select', value_select);
+    // console.log('value_select', value_select);
 
-    console.log(button_filter)
+    // console.log(button_filter)
 
     let normal_select = false;
-    // console.log('normal_elect', normal_select)
-
 
 
     if (value_select === "*" && argument !== 'categorys') {
         normal_select = true;
-        // console.log(normal_select)
+
         button_filter.setAttribute('deactivate','')
 
     }else{
 
         button_filter.removeAttribute('deactivate');
-    }  
+    }
 
-    // console.log(argument)
-
-    // const list_product_select = document.querySelectorAll(`[${argument}*="${value_select}"]`)
-    // console.log(list_product_select)
-
-    // list_product_select.forEach( function(product_select) {
-        // console.log(product_select)
-        // product_select.classList.remove('d-none')
-    // });
-
-    // Lista de todos los productos
+    // List of all products
     const list_all_product_select = document.querySelectorAll(`[${argument}]`)
 
     list_all_product_select.forEach( function(product_select) {
-        // console.log(product_select.getAttribute(argument))
 
         let value_attribute = product_select.getAttribute(argument)
-        console.log(value_attribute)
+        // console.log(value_attribute)
 
         if (value_attribute.indexOf(value_select) !== -1 || normal_select) {
-            // console.log('if', value_attribute.indexOf(value_select))
-            // console.log(normal_select)
 
             product_select.classList.remove(`d-none-${argument}`)
         }
         else {
             product_select.classList.add(`d-none-${argument}`)
-            // console.log('else', value_attribute.indexOf(value_select))
         }
 
     });
@@ -316,10 +280,6 @@ function resetFilters() {
     button_filter.setAttribute('deactivate','')
 }
 
-// button_filter.setAttribute('deactivate','')
-
 selectFilter('categorys')
 resetFilters()
 
-
-    // document.querySelector(`#products-filter d-none']`).classList.remove('d-none')
