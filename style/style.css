@@ -1,5 +1,7 @@
+@charset "UTF-8";
 @import url("https://fonts.googleapis.com/css2?family=Playfair+Display:wght@500&display=swap");
 @import url("https://fonts.googleapis.com/css2?family=Montserrat:wght@300&display=swap");
+@import url("https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css");
 html,
 body {
   height: 100%;
@@ -56,15 +58,50 @@ input *, select * {
   color: var(--color-text);
 }
 
-select {
-  cursor: pointer;
+i[icon-filter] {
+  position: relative;
+  display: inline-block;
+  height: 1rem;
+  font-style: normal;
+  font-size: 1rem;
+  transition: all 0.25s ease-in-out;
+  min-width: 1rem;
 }
-select option {
+i[icon-filter]::before {
+  content: "";
+  position: absolute;
+  color: var(--color-text);
+  left: 0;
+  top: 0;
+  font-family: FontAwesome;
+  font-size: inherit;
+  line-height: 1rem;
+  font-style: normal;
+  padding: 0;
+}
+i[icon-filter=search]::before {
+  content: "";
+}
+i[icon-filter=angle-down]::before {
+  content: "";
+  font-size: 25px;
+}
+
+select[select-filter] {
+  cursor: pointer;
+  -webkit-appearance: none;
+}
+select[select-filter] option {
   font-family: inherit;
   line-height: inherit;
   font-size: 14px;
   text-transform: uppercase;
   color: #747474;
+}
+select[select-filter]:active + i[icon-filter] {
+  transform: rotateX(-180deg);
+  transform-origin: center center;
+  transition: all 0.25s ease-in-out;
 }
 
 div[no-results] {
@@ -74,7 +111,7 @@ div[no-results] {
   align-self: center;
 }
 
-a {
+a[link-filter] {
   text-decoration: none;
   animation: a-intro 1s ease;
   display: block;
@@ -109,7 +146,7 @@ a {
 }
 /* General */
 /* Button */
-button.btn {
+button[btn-filter] {
   background-color: #163F75;
   color: white;
   border: none;
@@ -124,11 +161,11 @@ button.btn {
   overflow: hidden;
 }
 
-button.btn:hover {
+button[btn-filter]:hover {
   opacity: 0.9;
 }
 
-button.btn:active {
+button[btn-filter]:active {
   box-shadow: inset 1px 1px 2px white, inset 0 0 4px black, 1px 1px 1px #808080;
   opacity: 1;
 }
@@ -139,6 +176,7 @@ body {
   font-size: 1rem;
   font-weight: 300;
   color: var(--color-text);
+  border: 1px dashed grey;
 }
 body main section {
   max-width: 1440px;
@@ -148,18 +186,18 @@ body main section {
   flex-wrap: wrap;
   padding-bottom: 1.5rem;
 }
-body main section article.principal {
+body main section article.principal-filter {
   flex: 0 0 70%;
   max-width: 70%;
 }
 @media (min-width: 992px) {
-  body main section article.principal {
+  body main section article.principal-filter {
     padding-top: 3rem !important;
     padding-bottom: 3rem !important;
   }
 }
 @media (min-width: 1200px) {
-  body main section article.principal {
+  body main section article.principal-filter {
     padding-top: 4.5rem !important;
     padding-bottom: 4.5rem !important;
   }
@@ -173,32 +211,34 @@ body main section .filter {
   padding: 25px 0px;
   margin-bottom: 60px;
 }
-body main section .filter .col {
+body main section .filter .col-filter {
   padding-left: 15px;
   padding-right: 15px;
   margin-bottom: 1.5rem;
   flex: 1 0 100%;
+  display: flex;
+  align-items: end;
 }
 @media (min-width: 992px) {
-  body main section .filter .col {
+  body main section .filter .col-filter {
     flex-basis: 40% !important;
   }
-  body main section .filter .col:first-child, body main section .filter .col:first-child + .col {
+  body main section .filter .col-filter:first-child, body main section .filter .col-filter:first-child + .col-filter {
     flex-basis: 50% !important;
   }
-  body main section .filter .col:last-child {
+  body main section .filter .col-filter:last-child {
     flex-basis: 20% !important;
   }
 }
 @media (min-width: 1200px) {
-  body main section .filter .col {
+  body main section .filter .col-filter {
     flex-basis: 20% !important;
   }
-  body main section .filter .col:first-child, body main section .filter .col:first-child + .col {
+  body main section .filter .col-filter:first-child, body main section .filter .col-filter:first-child + .col-filter {
     flex-basis: 20% !important;
   }
 }
-body main section .filter .col:last-child {
+body main section .filter .col-filter:last-child {
   display: flex;
   justify-content: flex-end;
 }
@@ -260,13 +300,16 @@ body main section .products .col a .image .text {
   transition: all 0.25s ease-in-out 0s;
   font-family: "Playfair Display", serif;
 }
+body main section .products .col a .image .text * {
+  font-size: 1.2rem;
+}
 body main section .products .col a .image:hover .text {
   opacity: 1;
   background-color: rgba(0, 0, 0, 0.3);
   transition: all 0.25s ease-in-out 0s;
 }
 
-.container {
+.container-filter {
   width: 100%;
   padding-right: 15px;
   padding-left: 15px;

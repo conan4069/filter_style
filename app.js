@@ -1,5 +1,5 @@
 const productos = [
-    // {name: '', text: '', category: '', material: '', system: ''},
+    // {name: '', text: '', category: '', material: '', system: '', image:''},
 
     {
         name: 'Natural',
@@ -36,19 +36,85 @@ const productos = [
 
 ]
 
-const formulario = document.querySelector('#formulario');
-const resultado = document.querySelector('#products');
+const select_categorys = [
+    'category Natural',
+    'category Infinito',
+    'category Tosca',
+    'category Virginia',
+]
+const content_category = document.querySelector('select[select-filter="category"]');
+
+const select_materials = [
+    'Material Natural',
+    'Material Infinito',
+    'Material Tosca',
+    'Material Virginia',
+]
+const content_material = document.querySelector('select[select-filter="materials"]');
+
+const select_systems = [
+    'System Natural',
+    'System Infinito',
+    'System Tosca',
+    'System Virginia',
+] 
+const content_system = document.querySelector('select[select-filter="systems"]');
+
+const contentCategory = () => {
+
+    content_category.innerHTML = '';
+
+    for (let category of select_categorys) {
+        console.log(category)
+
+        content_category.innerHTML += `
+            <option value="">${category}</option>
+        `
+    }
+}
+contentCategory();
+
+const contentMaterial = () => {
+
+    content_material.innerHTML = '<option value="*">Materials</option>';
+
+    for (let material of select_materials) {
+        console.log(material)
+
+        content_material.innerHTML += `
+            <option value="">${material}</option>
+        `
+    }
+}
+contentMaterial();
+
+const contentSystem = () => {
+
+    content_system.innerHTML = '<option value="*">Opening systems</option>';
+
+    for (let system of select_systems) {
+        console.log(system)
+
+        content_system.innerHTML += `
+            <option value="">${system}</option>
+        `
+    }
+}
+contentSystem();
+
+const search_filter = document.querySelector('#search-filter');
+const results = document.querySelector('#products-filter');
 
 const contentProducts = () => {
 
-    resultado.innerHTML = '';
+    results.innerHTML = '';
 
     for (let producto of productos) {
         let name = producto.name.toLowerCase();
 
-        resultado.innerHTML += `
+        results.innerHTML += `
             <div class="col" name=" ${producto.name}" category="${producto.category}" material="${producto.material}" system="${producto.system}">
-                <a href="#">
+                <a href="#" link-filter>
                     <div class="image">
                         <img src="${producto.image}" alt="">
                         <div class="text">
@@ -66,9 +132,9 @@ const contentProducts = () => {
         `
     }
 
-    if (resultado.innerHTML === '') {
-        resultado.innerHTML = `<div no-results style="display: flex">Ningun resultado</div>`
-    } else resultado.innerHTML += `<div no-results>Ningun resultado</div>`
+    if (results.innerHTML === '') {
+        results.innerHTML = `<div no-results style="display: flex">Ningun resultado</div>`
+    } else results.innerHTML += `<div no-results>Ningun resultado</div>`
 }
 contentProducts();
 
@@ -76,38 +142,38 @@ contentProducts();
 
 const filtrar = () => {
 
-    // console.log(formulario.value);
+    // console.log(search_filter.value);
 
-    const texto = formulario.value.toLowerCase();
+    const text = search_filter.value.toLowerCase();
 
-    console.log('texto',texto)
+    console.log('texto',text)
 
 
     for (let producto of productos) {
         let name = producto.name.toLowerCase();
 
-        if (name.indexOf(texto) !== -1) {
-            document.querySelector(`#products [name*='${producto.name}']`).classList.remove('d-none');
+        if (name.indexOf(text) !== -1) {
+            document.querySelector(`#products-filter [name*='${producto.name}']`).classList.remove('d-none');
             console.log('alguno tiene')
         }
         else {
-            document.querySelector(`#products [name*='${producto.name}']`).classList.add('d-none');
+            document.querySelector(`#products-filter [name*='${producto.name}']`).classList.add('d-none');
             console.log('nintuno tiene')
         }
     }
 
-    const all_product = document.querySelectorAll('#products [name]').length;
+    const all_product = document.querySelectorAll('#products-filter [name]').length;
     console.log('all_producta',all_product)
-    const d_none_product = document.querySelectorAll('#products [name].d-none').length;
+    const d_none_product = document.querySelectorAll('#products-filter [name].d-none').length;
     console.log('d_none_product',d_none_product)
 
     if (all_product === d_none_product) {
-        document.querySelector(`#products > [no-results]`).style.display = 'flex';
+        document.querySelector(`#products-filter > [no-results]`).style.display = 'flex';
     }
     else {
-         document.querySelector(`#products > [no-results]`).style.display = 'none';
+         document.querySelector(`#products-filter > [no-results]`).style.display = 'none';
     }
 
    
 }
-formulario.addEventListener('keyup', filtrar);
+search_filter.addEventListener('keyup', filtrar);

@@ -6,13 +6,16 @@
     <meta name="description" content="Filtrado" />
     <!-- styles -->
     <link rel="stylesheet" href="./style/style.css">
+
+     <!-- <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"> -->
+
     <title>Filtro</title>
 </head>
 <body>
     <main>
         <section>
-            <div class="container">
-                <article class="principal">
+            <div class="container-filter">
+                <article class="principal-filter">
                     <h1>
                         Lorem ipsum dolor sit amet.
                     </h1>
@@ -24,31 +27,36 @@
         </section>
 
         <section>
-            <div class="container">
+            <div class="container-filter">
                 <div class="filter">
-                    <div class="col">
-                        <select name="algo" id="algo" data-type="categoria">
+                    <div class="col-filter">
+                        <select name="algo" select-filter="category">
                             <option value="1">value 1</option>
                             <option value="2">value 2</option>
                         </select>
+                        <i icon-filter="angle-down"></i>
+
                     </div>
-                    <div class="col">
-                        <input type="text" id="formulario">
+                    <div class="col-filter">
+                        <input type="text" id="search-filter">
+                        <i icon-filter="search"></i>
                     </div>
-                    <div class="col">
-                        <select name="" id="">
+                    <div class="col-filter">
+                        <select name="" id="" select-filter="materials">
                             <option value="">333</option>
                             <option value="">333</option>
                         </select>
+                        <i icon-filter="angle-down"></i>
                     </div>
-                    <div class="col">
-                        <select name="" id="">
+                    <div class="col-filter">
+                        <select name="" id="" select-filter="systems">
                             <option value="">444</option>
                             <option value="">444</option>
                         </select>
+                        <i icon-filter="angle-down"></i>
                     </div>
-                    <div class="col">
-                        <button class="btn">Button</button>
+                    <div class="col-filter">
+                        <button btn-filter>Button</button>
                     </div>
                 </div>
             </div>
@@ -58,8 +66,8 @@
 
         <!-- Products -->
         <section>
-            <div class="container">
-                <div class="products" id="products">
+            <div class="container-filter">
+                <div class="products" id="products-filter">
                     <div no-results>
                         Ningun resultado
                     </div>
