@@ -125,7 +125,7 @@ a[link-filter] {
     transform: scale(1);
   }
 }
-.d-none {
+.d-none, .d-none-categorys, .d-none-materials, .d-none-systems {
   transform: scale(0);
   opacity: 0;
   animation: d-none 1s ease-out forwards;
@@ -159,6 +159,11 @@ button[btn-filter] {
   cursor: pointer;
   position: relative;
   overflow: hidden;
+  user-select: none;
+}
+button[btn-filter][deactivate] {
+  background-color: #CCCCCC;
+  pointer-events: none;
 }
 
 button[btn-filter]:hover {

@@ -4,23 +4,31 @@ const productos = [
     {
         name: 'Natural',
         text: 'Text Natural',
-        category: 'category Natural',
-        material: 'Material Natural',
+        category: 'Modern, category Natural, otra',
+        material: 'veneer, Material Natural',
         system: ' System Natural',
         image: 'https://stosacucine20.imgix.net/en/immagini_cucine/modern-kitchens-natural-1567.jpg?auto=format%2Ccompress&crop=focalpoint&fit=crop&fp-x=.0&fp-y=.0&h=300&ixlib=php-2.3.0&mdate=1553160074&q=85&w=450'
     },
     {
-        name: 'Infinito',
+        name: 'Infinity',
         text: 'Text Infinito',
-        category: 'category Infinito',
-        material: 'Material Infinito',
+        category: 'Modern, category Infinito',
+        material: 'laminate, pet, Material Infinito',
         system: ' System Infinito',
+        image: 'https://stosacucine10.imgix.net/en/immagini_cucine/modern-kitchens-aleve-3726.jpg?auto=format%2Ccompress&crop=focalpoint&fit=crop&fp-x=.0&fp-y=.0&h=300&ixlib=php-2.3.0&mdate=1570715209&q=85&w=450'
+    },
+    {
+        name: 'Metropolis',
+        text: 'Text Metropolis',
+        category: 'Modern, Category Metropolis',
+        material: 'laminate, pet, Material Metropolis',
+        system: ' System Metropolis',
         image: 'https://stosacucine30.imgix.net/en/immagini_cucine/modern-kitchens-metropolis-1568.jpg?auto=format%2Ccompress&crop=focalpoint&fit=crop&fp-x=.0&fp-y=.0&h=300&ixlib=php-2.3.0&mdate=1553160941&q=85&w=450'
     },
     {
         name: 'Tosca',
         text: 'Text Tosca',
-        category: 'category Tosca',
+        category: 'Classic, category Tosca',
         material: 'Material Tosca',
         system: ' System Tosca',
         image: 'https://stosacucine30.imgix.net/en/immagini_cucine/modern-kitchens-aliant-1581.jpg?auto=format%2Ccompress&crop=focalpoint&fit=crop&fp-x=.0&fp-y=.0&h=300&ixlib=php-2.3.0&mdate=1553163229&q=85&w=450'
@@ -28,23 +36,48 @@ const productos = [
     {
         name: 'Virginia',
         text: 'Text Virginia',
-        category: 'category Virginia',
+        category: 'Classic, category Virginia, otra',
         material: 'Material Virginia',
         system: ' System Virginia',
         image: 'https://stosacucine10.imgix.net/en/immagini_cucine/modern-kitchens-aleve-3726.jpg?auto=format%2Ccompress&crop=focalpoint&fit=crop&fp-x=.0&fp-y=.0&h=300&ixlib=php-2.3.0&mdate=1570715209&q=85&w=450'
+    },
+    {
+        name: 'Frame',
+        text: 'Text Frame',
+        category: 'Modern, otra',
+        material: 'lacquer',
+        system: 'flat groove wint pocket, Recessed groove',
+        image: 'https://stosacucine20.imgix.net/en/immagini_cucine/modern-kitchens-rewind-1641.jpg?auto=format%2Ccompress&crop=focalpoint&fit=crop&fp-x=.0&fp-y=.0&h=300&ixlib=php-2.3.0&mdate=1553174088&q=85&w=450'
+    },
+    {
+        name: 'Saturnia',
+        text: 'Text Saturnia',
+        category: 'Classic',
+        material: 'wood',
+        system: 'handle',
+        image: 'https://stosacucine30.imgix.net/en/immagini_cucine/classic-kitchens-saturnia-1824.jpg?auto=format%2Ccompress&crop=focalpoint&fit=crop&fp-x=.0&fp-y=.0&h=300&ixlib=php-2.3.0&mdate=1553702457&q=85&w=450'
     },
 
 ]
 
 const select_categorys = [
+    'Modern',
+    'Classic',
     'category Natural',
     'category Infinito',
     'category Tosca',
     'category Virginia',
+    'Category Metropolis',
+    'otra'
 ]
-const content_category = document.querySelector('select[select-filter="category"]');
+const content_category = document.querySelector('select[select-filter="categorys"]');
 
 const select_materials = [
+    'laminate',
+    'veneer',
+    'pet',
+    'lacquer',
+    'wood',
     'Material Natural',
     'Material Infinito',
     'Material Tosca',
@@ -53,6 +86,9 @@ const select_materials = [
 const content_material = document.querySelector('select[select-filter="materials"]');
 
 const select_systems = [
+    'flat groove wint pocket',
+    'Recessed groove',
+    'handle',
     'System Natural',
     'System Infinito',
     'System Tosca',
@@ -65,10 +101,10 @@ const contentCategory = () => {
     content_category.innerHTML = '';
 
     for (let category of select_categorys) {
-        console.log(category)
+        // console.log(category)
 
         content_category.innerHTML += `
-            <option value="">${category}</option>
+            <option value="${category}">${category}</option>
         `
     }
 }
@@ -79,10 +115,10 @@ const contentMaterial = () => {
     content_material.innerHTML = '<option value="*">Materials</option>';
 
     for (let material of select_materials) {
-        console.log(material)
+        // console.log(material)
 
         content_material.innerHTML += `
-            <option value="">${material}</option>
+            <option value="${material}">${material}</option>
         `
     }
 }
@@ -93,10 +129,10 @@ const contentSystem = () => {
     content_system.innerHTML = '<option value="*">Opening systems</option>';
 
     for (let system of select_systems) {
-        console.log(system)
+        // console.log(system)
 
         content_system.innerHTML += `
-            <option value="">${system}</option>
+            <option value="${system}">${system}</option>
         `
     }
 }
@@ -113,7 +149,7 @@ const contentProducts = () => {
         let name = producto.name.toLowerCase();
 
         results.innerHTML += `
-            <div class="col-filter" name=" ${producto.name}" category="${producto.category}" material="${producto.material}" system="${producto.system}">
+            <div class="col-filter" name=" ${producto.name}" categorys="${producto.category}" materials="${producto.material}" systems="${producto.system}">
                 <a href="#" link-filter>
                     <div class="image">
                         <img src="${producto.image}" alt="">
@@ -141,6 +177,15 @@ contentProducts();
 // const elemento = document.querySelector('#products [name*="Virginia"]');
 
 const filtrar = () => {
+
+    console.log(
+        document.getElementById('search-filter').value.length
+    )
+
+    if (document.getElementById('search-filter').value.length <= 0) {
+        button_filter.setAttribute('deactivate','')
+    }
+    else button_filter.removeAttribute('deactivate');
 
     // console.log(search_filter.value);
 
@@ -177,3 +222,101 @@ const filtrar = () => {
    
 }
 search_filter.addEventListener('keyup', filtrar);
+
+
+const btn_filter = document.querySelectorAll('[select-filter]');
+
+
+const selectElement = document.querySelector('[select-filter]');
+
+selectElement.addEventListener('change', (event) => {
+    // const resultado = document.querySelector('.resultado');
+    // resultado.textContent = `Te gusta el sabor ${event.target.value}`;
+    console.log(event.target.value)
+});
+
+const button_filter = document.querySelector('[btn-filter]');
+
+function selectFilter (argument) {
+    // Filtrar los select
+
+    console.log('argument(',argument,')')
+    const value_select = document.querySelector(`[select-filter="${argument}"]`).value;
+    console.log('value_select', value_select);
+
+    console.log(button_filter)
+
+    let normal_select = false;
+    // console.log('normal_elect', normal_select)
+
+
+
+    if (value_select === "*" && argument !== 'categorys') {
+        normal_select = true;
+        // console.log(normal_select)
+        button_filter.setAttribute('deactivate','')
+
+    }else{
+
+        button_filter.removeAttribute('deactivate');
+    }  
+
+    // console.log(argument)
+
+    // const list_product_select = document.querySelectorAll(`[${argument}*="${value_select}"]`)
+    // console.log(list_product_select)
+
+    // list_product_select.forEach( function(product_select) {
+        // console.log(product_select)
+        // product_select.classList.remove('d-none')
+    // });
+
+    // Lista de todos los productos
+    const list_all_product_select = document.querySelectorAll(`[${argument}]`)
+
+    list_all_product_select.forEach( function(product_select) {
+        // console.log(product_select.getAttribute(argument))
+
+        let value_attribute = product_select.getAttribute(argument)
+        console.log(value_attribute)
+
+        if (value_attribute.indexOf(value_select) !== -1 || normal_select) {
+            // console.log('if', value_attribute.indexOf(value_select))
+            // console.log(normal_select)
+
+            product_select.classList.remove(`d-none-${argument}`)
+        }
+        else {
+            product_select.classList.add(`d-none-${argument}`)
+            // console.log('else', value_attribute.indexOf(value_select))
+        }
+
+    });
+
+}
+
+function resetFilters() {
+
+    // Reset input
+    document.getElementById('search-filter').value ='';
+    const products_filter_none = document.querySelectorAll(`#products-filter .d-none`);
+    products_filter_none.forEach(key => key.classList.remove('d-none'))
+
+
+    // Reset select
+    const reset_select_filter = document.querySelectorAll('[select-filter]:not([select-filter="categorys"])');
+    reset_select_filter.forEach( key => key.value = "*");
+
+    // Reset all products
+    document.querySelectorAll('#products-filter .col-filter').forEach( key => key.classList.remove('d-none-materials', 'd-none-systems'))
+
+    button_filter.setAttribute('deactivate','')
+}
+
+// button_filter.setAttribute('deactivate','')
+
+selectFilter('categorys')
+resetFilters()
+
+
+    // document.querySelector(`#products-filter d-none']`).classList.remove('d-none')

@@ -30,7 +30,7 @@
             <div class="container-filter">
                 <div class="filter">
                     <div class="col-filter">
-                        <select name="algo" select-filter="category">
+                        <select name="algo" select-filter="categorys" onchange="selectFilter('categorys')">
                             <option value="1">value 1</option>
                             <option value="2">value 2</option>
                         </select>
@@ -38,25 +38,25 @@
 
                     </div>
                     <div class="col-filter">
-                        <input type="text" id="search-filter">
+                        <input type="text" id="search-filter" placeholder='search by name'>
                         <i icon-filter="search"></i>
                     </div>
                     <div class="col-filter">
-                        <select name="" id="" select-filter="materials">
+                        <select  select-filter="materials" onchange="selectFilter('materials')">
                             <option value="">333</option>
                             <option value="">333</option>
                         </select>
                         <i icon-filter="angle-down"></i>
                     </div>
                     <div class="col-filter">
-                        <select name="" id="" select-filter="systems">
+                        <select  select-filter="systems" onchange="selectFilter('systems')">
                             <option value="">444</option>
                             <option value="">444</option>
                         </select>
                         <i icon-filter="angle-down"></i>
                     </div>
                     <div class="col-filter">
-                        <button btn-filter>Button</button>
+                        <button btn-filter onclick="resetFilters()" deactivate>Button</button>
                     </div>
                 </div>
             </div>
