@@ -293,6 +293,9 @@ body main section .products .col-filter a:hover .image .text {
   opacity: 1;
   background-color: rgba(0, 0, 0, 0.3);
 }
+body main section .products .col-filter a:hover .name .discover {
+  opacity: 1;
+}
 body main section .products .col-filter a .image {
   width: 100%;
   position: relative;
@@ -333,12 +336,46 @@ body main section .products .col-filter a .image:hover .text {
   background-color: rgba(0, 0, 0, 0.3);
   transition: all 0.25s ease-in-out 0s;
 }
+body main section .products .col-filter a .name {
+  position: relative;
+}
 body main section .products .col-filter a .name h4 {
   font-size: 1.25rem;
   color: var(--color-h);
   font-family: "Playfair Display", serif;
   line-height: 1.38;
   font-weight: 500;
+}
+body main section .products .col-filter a .name .discover {
+  position: absolute;
+  top: 0;
+  right: 0;
+  line-height: 2rem;
+  color: #163f75;
+  text-transform: uppercase;
+  opacity: 0;
+  transition: opacity 0.25s ease-in-out 0s;
+  padding-right: 30px;
+  font-weight: 600;
+}
+body main section .products .col-filter a .name .discover:hover::after {
+  right: -5px;
+  transition: right 0.25s ease-in-out 0s;
+}
+body main section .products .col-filter a .name .discover::after {
+  content: "";
+  position: absolute;
+  color: var(--color-text);
+  right: 0;
+  top: 6px;
+  font-family: FontAwesome;
+  font-size: 22px;
+  line-height: 1rem;
+  font-style: normal;
+  padding: 0;
+  font-weight: lighter;
+  transition: right 0.25s ease-in-out 0s;
+  color: var(--filter-color-border);
 }
 
 .container-filter {

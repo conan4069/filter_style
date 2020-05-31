@@ -162,6 +162,9 @@ const contentProducts = () => {
                     </div>
                     <div class="name">
                         <h4>${producto.name}</h4>
+                        <span class="discover">
+                            discover
+                        </span>
                     </div>
                 </a>
             </div>
