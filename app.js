@@ -71,7 +71,8 @@ const select_categorys = [
     'category Tosca',
     'category Virginia',
     'Category Metropolis',
-    'otra'
+    'otra',
+    'Null'
 ]
 const content_category = document.querySelector('select[select-filter="categorys"]');
 
@@ -111,14 +112,17 @@ const content_system = document.querySelector('select[select-filter="systems"]')
 // Select categorys List
 const contentCategory = () => {
 
-    content_category.innerHTML = '';
+    if (content_category !== null){
 
-    for (let category of select_categorys) {
-        // console.log(category)
+        content_category.innerHTML = '';
 
-        content_category.innerHTML += `
-            <option value="${category}">${category}</option>
-        `
+        for (let category of select_categorys) {
+            // console.log(category)
+
+            content_category.innerHTML += `
+                <option value="${category}">${category}</option>
+            `
+        }
     }
 }
 contentCategory();
@@ -129,14 +133,18 @@ contentCategory();
 // Select Materials List
 const contentMaterial = () => {
 
-    content_material.innerHTML = '<option value="*">Materials</option>';
 
-    for (let material of select_materials) {
-        // console.log(material)
+    if (content_material !== null) {
 
-        content_material.innerHTML += `
-            <option value="${material}">${material}</option>
-        `
+        content_material.innerHTML = '<option value="*">Materials</option>';
+
+        for (let material of select_materials) {
+            // console.log(material)
+
+            content_material.innerHTML += `
+                <option value="${material}">${material}</option>
+            `
+        }
     }
 }
 contentMaterial();
@@ -147,14 +155,17 @@ contentMaterial();
 // Select Systems List
 const contentSystem = () => {
 
-    content_system.innerHTML = '<option value="*">Opening systems</option>';
+    if (content_system !== null){
 
-    for (let system of select_systems) {
-        // console.log(system)
+        content_system.innerHTML = '<option value="*">Opening systems</option>';
 
-        content_system.innerHTML += `
-            <option value="${system}">${system}</option>
-        `
+        for (let system of select_systems) {
+            // console.log(system)
+
+            content_system.innerHTML += `
+                <option value="${system}">${system}</option>
+            `
+        }
     }
 }
 contentSystem();
@@ -197,8 +208,6 @@ const contentProducts = () => {
         `
     }
 
-    console.log(results.getElementsByClassName('categorys'))
-
     if (results.innerHTML === '') {
         results.innerHTML = `<div no-results style="display: flex">Any result... </div>`
     } else results.innerHTML += `<div no-results>Any result...</div>`
@@ -217,10 +226,12 @@ const filtrar = () => {
     const button_filter = document.querySelector('[btn-filter]');
 
     // Search length
-    if (document.getElementById('search-filter').value.length <= 0) {
-        button_filter.setAttribute('deactivate','')
+    if (button_filter !== null) {
+        if (document.getElementById('search-filter').value.length <= 0) {
+            button_filter.setAttribute('deactivate','')
+        }
+        else button_filter.removeAttribute('deactivate');
     }
-    else button_filter.removeAttribute('deactivate');
 
 
     const text = search_filter.value.toLowerCase();
@@ -254,7 +265,9 @@ const filtrar = () => {
     }
 }
 // Always active when writing to the input field
-search_filter.addEventListener('keyup', filtrar);
+if (search_filter !== null) {
+    search_filter.addEventListener('keyup', filtrar);
+}
 
 
 
@@ -267,52 +280,60 @@ function selectFilter (argument) {
     // Button
     const button_filter = document.querySelector('[btn-filter]');
 
-    // Select value
-    const value_select = document.querySelector(`[select-filter="${argument}"]`).value;
+    // Validate if select exists 
+    const select_argument = document.querySelector(`[select-filter="${argument}"]`);
 
-    // Select initial state (all)
-    let normal_select = false;
+    if (select_argument !== null) {
 
-    // Botton on / off
-    if (value_select === "*" && argument !== 'categorys') {
-        normal_select = true;
-        button_filter.setAttribute('deactivate','')
+        // Select value
+        const value_select = select_argument.value;
 
-    }else{
-        button_filter.removeAttribute('deactivate');
-    }
+        // Select initial state (all)
+        let normal_select = false;
 
-    // List of all products (select)
-    const list_all_product_select = document.querySelectorAll(`[${argument}]`)
+        // Botton on / off and select status
+        if (value_select === "*" && argument !== 'categorys') {
+            normal_select = true;
+            if (button_filter !== null) {
+                button_filter.setAttribute('deactivate','')
+            }
+        }else if( button_filter !== null){
+            button_filter.removeAttribute('deactivate');
+        }
 
-    list_all_product_select.forEach( function(product_select) {
 
-        let value_attribute = product_select.getAttribute(argument)
-        // console.log(value_attribute)
+        // List of all products (select)
+        const list_all_product_select = document.querySelectorAll(`[${argument}]`)
 
-        if (value_attribute.indexOf(value_select) !== -1 || normal_select) {
+        list_all_product_select.forEach( function(product_select) {
 
-            product_select.classList.remove(`d-none-${argument}`)
+            let value_attribute = product_select.getAttribute(argument)
+            // console.log(value_attribute)
+
+            if (value_attribute.indexOf(value_select) !== -1 || normal_select) {
+
+                product_select.classList.remove(`d-none-${argument}`)
+            }
+            else {
+                product_select.classList.add(`d-none-${argument}`)
+            }
+
+        });
+
+
+        // Check if there are products displayed
+        const all_product = document.querySelectorAll('#products-filter [name]').length;
+        const d_none_product = document.querySelectorAll('#products-filter [name][class*="d-none"]').length;
+
+        // If you don't find results
+        if (all_product === d_none_product) {
+            document.querySelector(`#products-filter > [no-results]`).style.display = 'flex';
         }
         else {
-            product_select.classList.add(`d-none-${argument}`)
+            document.querySelector(`#products-filter > [no-results]`).style.display = 'none';
         }
 
-    });
-
-
-    // Check if there are products displayed
-    const all_product = document.querySelectorAll('#products-filter [name]').length;
-    const d_none_product = document.querySelectorAll('#products-filter [name][class*="d-none"]').length;
-
-    // If you don't find results
-    if (all_product === d_none_product) {
-        document.querySelector(`#products-filter > [no-results]`).style.display = 'flex';
     }
-    else {
-        document.querySelector(`#products-filter > [no-results]`).style.display = 'none';
-    }
-
 }
 // The filter by selection is initialized in categories, to show initially
 selectFilter('categorys')
@@ -323,7 +344,10 @@ selectFilter('categorys')
 function resetFilters() {
 
     //Clean select
-    document.getElementById('search-filter').value ='';
+    const id_search_filter = document.getElementById('search-filter');
+    if (id_search_filter !== null) {
+        id_search_filter.value ='';
+    }
 
     // Reset input (search)
     const products_filter_none = document.querySelectorAll(`#products-filter .d-none`);
@@ -339,7 +363,9 @@ function resetFilters() {
 
     // Button
     const button_filter = document.querySelector('[btn-filter]');
-    button_filter.setAttribute('deactivate','')
+    if (button_filter !== null) {
+        button_filter.setAttribute('deactivate','')
+    }
 
     // Reset the container of no results
     document.querySelector(`#products-filter > [no-results]`).style.display = 'none';
