@@ -114,7 +114,7 @@ const contentCategory = () => {
 
     if (content_category !== null){
 
-        content_category.innerHTML = '';
+        content_category.innerHTML = '<option value="*">All</option>';        // content_category.innerHTML = '';
 
         for (let category of select_categorys) {
             // console.log(category)
@@ -292,7 +292,8 @@ function selectFilter (argument) {
         let normal_select = false;
 
         // Botton on / off and select status
-        if (value_select === "*" && argument !== 'categorys') {
+        // if (value_select === "*" && argument !== 'categorys') {
+        if (value_select === "*") {
             normal_select = true;
             if (button_filter !== null) {
                 button_filter.setAttribute('deactivate','')
@@ -355,11 +356,11 @@ function resetFilters() {
 
 
     // Reset select
-    const reset_select_filter = document.querySelectorAll('[select-filter]:not([select-filter="categorys"])');
+    const reset_select_filter = document.querySelectorAll('[select-filter]');
     reset_select_filter.forEach( key => key.value = "*");
 
     // Reset all products
-    document.querySelectorAll('#products-filter .col-filter').forEach( key => key.classList.remove('d-none-materials', 'd-none-systems'));
+    document.querySelectorAll('#products-filter .col-filter').forEach( key => key.classList.remove('d-none-categorys','d-none-materials', 'd-none-systems'));
 
     // Button
     const button_filter = document.querySelector('[btn-filter]');
